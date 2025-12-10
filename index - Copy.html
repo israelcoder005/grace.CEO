@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aswaad Auto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        .vid {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .custom-navbar {
+            background-color: black;
+            margin-top: 20px;
+            margin-left: 120px;
+            margin-right: 120px;
+            padding: 1%;
+            border-radius: 15px;
+            display: flex;
+            position: relative;
+            z-index: 10;
+        }
+
+        .img {
+            margin-bottom: 30px;
+        }
+
+        .nav-link {
+            color: whitesmoke;
+            margin-top: 60px;
+            margin-right: 5px;
+        }
+
+        .nav-link:hover {
+            color: gold;
+        }
+
+        .custom-cta {
+            background-color: rgb(246, 245, 244);
+            border-radius: 20px;
+            margin-right: 90px;
+            margin-top: 60px;
+            padding: 18px;
+            white-space: nowrap;
+        }
+
+        .custom-cta:hover {
+            background-color: gold;
+        }
+
+        /* === CENTER NAV ITEMS & CTA BUTTON VERTICALLY === */
+        @media (min-width: 992px) {
+            .custom-navbar .navbar-nav {
+                align-items: center;
+            }
+
+            .custom-navbar .nav-link,
+            .custom-navbar .custom-cta {
+                margin-top: 0 !important;
+                display: flex;
+                align-items: center;
+            }
+
+            .custom-navbar .navbar-collapse {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .custom-navbar .navbar-brand {
+                display: flex;
+                align-items: center;
+            }
+        }
+
+        /* Ensure mobile toggle doesn't interfere */
+        @media (max-width: 991.98px) {
+            .custom-navbar .navbar-collapse {
+                margin-top: 15px;
+            }
+
+            .custom-navbar .custom-cta {
+                margin: 15px auto 0 !important;
+                display: block !important;
+                width: fit-content !important;
+            }
+        }
+
+        .content {
+            padding-top: 7%;
+            position: relative;
+            z-index: 5;
+            color: white;
+            text-align: center;
+        }
+
+        .hero-cta {
+            background-color: rgb(12, 9, 6);
+            border-radius: 20px;
+            margin-left: 39%;
+            margin-top: 15px;
+            padding: 18px;
+            white-space: nowrap;
+            border-color: #10cfed;
+        }
+
+        .hero-cta:hover {
+            background-color: silver;
+            border-color: rgb(18, 17, 17);
+        }
+
+        .fas-cta {
+            background-color: #0d0d0d;
+            border: 12px;
+            border-color: #10cfed;
+            padding: 15px;
+            white-space: nowrap;
+            border-radius: 45%;
+            margin-bottom: 10%;
+            margin-left: 90%;
+            font-size: 20px;
+
+
+
+        }
+
+        .fas-cta:hover {
+            background-color: rgb(58, 57, 55);
+            border-color: rgb(247, 243, 243);
+        }
+
+        /* New section styles */
+        .perfect-home-section {
+            padding: 100px 0;
+            background-color: #f8f9fa;
+            position: relative;
+            z-index: 5;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #222;
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 40px 30px;
+            text-align: center;
+            height: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 4px solid gold;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+        }
+
+        .feature-icon i {
+            font-size: 2.5rem;
+            color: gold;
+        }
+
+        .feature-card h4 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #222;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .perfect-home-section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: #141414;
+            line-height: 1.6;
+        }
+
+
+        .feature-card {
+            border: none;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(244, 241, 241, 0.08);
+            margin-right: 5%;
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            background: #f8f9fa;
+            color: #222 !important;
+            filter: grayscale(100%);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .feature-icon:hover {
+
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            background: #f1f1f1;
+            filter: grayscale(100%);
+            color: #000 !important;
+        }
+
+        .feature-card h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #222;
+        }
+
+        .feature-card p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        .feature-card strong {
+            color: #333;
+        }
+
+        .right-image {
+            height: 600px;
+            border-radius: 0px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            object-fit: cover;
+            margin-top: 30%;
+            width: 70%;
+        }
+
+        @media (max-width: 768px) {
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .right-image {
+                height: 300px;
+                margin-top: 30px;
+            }
+        }
+
+        /* Responsive Hero CTA Button for Small Screens */
+        @media (max-width: 576px) {
+            .hero-cta {
+                margin-left: 10% !important;
+                margin-right: 10% !important;
+                padding: 14px 20px !important;
+                font-size: 14px !important;
+                white-space: normal !important;
+                text-align: center;
+                line-height: 1.4;
+            }
+
+            .hero-cta h6 {
+                font-size: 14px !important;
+                margin: 0;
+            }
+        }
+
+        /* RESPONSIVE NAVBAR ONLY - DO NOT TOUCH ANYTHING ELSE */
+        @media (max-width: 992px) {
+            .custom-navbar {
+                margin-left: 20px !important;
+                margin-right: 20px !important;
+                padding: 15px 10px !important;
+                margin-top: 10px !important;
+                border-radius: 12px !important;
+            }
+
+            .navbar-brand img.img {
+                width: 140px !important;
+                margin-bottom: 0 !important;
+            }
+
+            .navbar-nav {
+                text-align: center;
+                margin-top: 20px !important;
+            }
+
+            .nav-link {
+                margin: 8px 0 !important;
+                font-size: 1rem !important;
+            }
+
+            .custom-cta {
+                margin: 15px auto 0 !important;
+                display: block !important;
+                width: fit-content !important;
+                padding: 12px 25px !important;
+                font-size: 0.95rem !important;
+            }
+        }
+
+        /* Extra small screens - tighter layout */
+        @media (max-width: 576px) {
+            .custom-navbar {
+                margin-left: 10px !important;
+                margin-right: 10px !important;
+                padding: 12px 8px !important;
+            }
+
+            .navbar-brand img.img {
+                width: 120px !important;
+            }
+
+            .custom-cta {
+                padding: 10px 20px !important;
+                font-size: 0.9rem
+            }
+        }
+
+        @media (min-width: 769px) {
+            .text-center.mb-5 {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .text-center.mb-5 h3 {
+                margin: 0;
+                font-size: 2.2rem;
+                text-align: left;
+                flex: 1;
+            }
+
+            .fas-cta {
+                display: inline-block !important;
+                background-color: #000;
+                color: white;
+                border: none;
+                padding: 12px 24px;
+                font-size: 1rem;
+                font-weight: 600;
+                border-radius: 50px;
+                text-decoration: none;
+                white-space: nowrap;
+                margin-left: 26%;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+                transition: all 0.3s ease;
+                border-color: #10cfed;
+            }
+
+            .fas-cta:hover {
+                background-color: #0b0b0b;
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+                border-color: #10cfed;
+            }
+        }
+
+
+        @media (max-width: 768px) {
+            .text-center.mb-5 {
+                text-align: center;
+            }
+
+            .fas-cta {
+                display: block;
+                width: fit-content;
+                margin: 15px auto 0;
+                padding: 12px 28px;
+                font-size: 0.95rem;
+                background: #141414;
+                color: white;
+                border-radius: 50px;
+                text-align: center;
+                border-color: #10cfed;
+            }
+
+        }
+
+        @media (max-width: 500px) {
+            .text-left.mb-5 {
+                text-align: left;
+            }
+
+            .fas-cta {
+                display: block;
+                width: fit-content;
+                margin: 15px auto 0;
+                padding: 12px 28px;
+                font-size: 0.95rem;
+                background: #141414;
+                color: rgb(12, 11, 11);
+                border-radius: 50px;
+                text-align: left;
+                border-color: #10cfed;
+                margin: left 50%;
+
+            }
+        }
+
+        .navbar-toggler .navbar-toggler-icon {
+            background-color: rgb(176, 174, 174)
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="video-container">
+        <video class="vid" autoplay muted loop playsinline>
+            <source src="vid/14854556-uhd_3840_2160_30fps.mp4" type="video/mp4">
+        </video>
+        <div class="overlay"></div>
+    </div>
+
+
+    <nav class="navbar navbar-expand-lg custom-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img class="img"
+                    src="https://images.unsplash.com/photo-1521058001910-55b77aba2203?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Ym13JTIwbG9nb3xlbnwwfHwwfHx8MA%3D%3D&fm=jpg&q=60&w=3000"
+                    alt="BMW" width="200">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="index.html" style="color: #10cfed;">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="our-cars.html">Our Cars</a></li>
+                    <li class="nav-item"><a class="nav-link" href="service.html">Service</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="buy-engine.html">Buy Engine</a></li>
+
+
+
+                </ul>
+                <a href="#" class="btn custom-cta">Download Our Brochure Here</a>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="content">
+
+        <h2>The Ultimate Vehicle Compartment <br>it's your trusted companion for life's adventures,</h2>
+    </div>
+    <div>
+        <a href="#" class="btn hero-cta">
+            <h6 style="color: white;font-weight: 700;">CLICK HERE TO SEE HOW TO <br> DRIVE YOUR WAY INTO YOUR DREAM CAR
+            </h6>
+        </a>
+    </div>
+
+
+    <section style="padding: 80px 0; background-color: #f8f9fa; position: relative; z-index: 5;margin-top: 20%;">
+        <div class="container">
+            <div class="text-center mb-5">
+
+                <p style="color: #10cfed; font-size: 30px;font-weight: 500;text-align: center;">ASWAAD AUTOMOBILE </p>
+                <p> Aswaad Auto is a <span style="color: rgb(66, 64, 64);font-weight: 900;"> premier luxury automotive
+                        dealership in Nigeria</span>, specializing in high-performance sedans, sports coupes, and
+                    premium SUVs. Since our incorporation in 2018, we have remained committed to delivering world-class
+                    vehicles and exceptional ownership experiences that meet the growing demand for <span
+                        style="color: rgb(83, 79, 79);font-weight: 900;"> elite automotive excellence </span>.</p>
+
+                <div>
+                    <p>
+                        With a solid reputation for swift delivery,<span
+                            style="color: rgb(65, 61, 61);font-weight: 900;"> *exceptional engineering*</span>, and
+                        world-class build quality, we continue to set the standard in luxury automotive excellence. Our
+                        hallmark is integrity — delivering vehicles that are not only sleek and cutting-edge but also
+                        <span style="color: rgb(74, 71, 71);font-weight: 900;"> enduring and
+                            precision-engineered</span>.
+                    </p>
+                </div>
+                <div>
+
+                    <p>
+                        Discover exquisite, precision-engineered vehicles designed for unrivaled performance and opulent
+                        driving. Explore the finest in luxury automotive craftsmanship, complete with cutting-edge
+                        technology, exclusive models, and unmatched engineering excellence. Create a lasting legacy with
+                        Aswaad Auto —<span style="color:black ;font-weight: 900;"> the future of premium mobility in
+                            Nigeria </span>. Welcome to
+                    </p>
+                </div>
+
+
+                <div>
+                    <p>
+                        Cars aren't just metal, rubber, and glass; they're rolling diaries of human ambition. From the
+                        first sputter of Karl Benz's 1886 Patent-Motorwagen (0.75 hp, top speed 10 mph, basically a
+                        angry lawnmower) to today's 2,000-hp electric hypercars that hit 60 mph before you finish saying
+                        "torque vectoring," the story is one of relentless evolution.
+                    </p>
+
+                    </div>
+
+                    <section style="padding: 40px 0; background-color: #f9f9f9; position: relative; z-index: 1;">
+        <div class="container">
+            <div class="row text-center">
+
+                <!-- CARD 1 -->
+                <div class="col-md-4 mb-5">
+
+                    <div
+                        style="background: #fff; border-radius: 12px; padding: 30px 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.08) ;border-color: #10cfed; ">
+                        <div style="width: 70px; height: 70px; margin: 0 auto 20px;">
+                            <i style="font-size: 70px;margin-bottom: 50px;color: rgb(12, 12, 13);"
+                                class="fa-solid fa-car"></i>
+                        </div>
+                        <h5 style="font-weight: 700; color: #222; margin-top: 60px;">Premium Selection</h5>
+                        <p style="color: #555; font-size: 0.95rem; line-height: 1.5;">World-Class Maintenance: The
+                            Aswaad Auto Standard
+                            and priority scheduling, your drive stays seamless—preci Our certified technic.</p>
+                    </div>
+                </div>
+
+                <!-- CARD 2 -->
+                <div class="col-md-4 mb-5">
+                    <div
+                        style="background: #fff; border-radius: 12px; padding: 30px 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+                        <div style="width: 70px; height: 70px; margin: 0 auto 20px;">
+                            <i style="font-size: 70px;margin-bottom: 50px;color: rgb(12, 12, 13);"
+                                class="fa-solid fa-bolt-lightning"></i>
+                        </div>
+                        <h5 style="font-weight: 700; color: #222; margin-top: 60px;">Swift Delivery</h5>
+                        <p style="color: #555; font-size: 0.95rem; line-height: 1.5;">World-Class Maintenance: The
+                            Aswaad Auto Standard
+                            global benchmarks. Our certified technicians use OEM diagnive servicing, we keep your luxury
+                            car in flawless </p>
+                    </div>
+                </div>
+
+                <!-- CARD 3 -->
+                <div class="col-md-4 mb-5">
+                    <div
+                        style="background: #fff; border-radius: 12px; padding: 30px 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+                        <div style="width: 70px; height: 70px; margin: 0 auto 20px;">
+                            <i style="font-size: 70px;margin-bottom: 50px;color: rgb(12, 12, 13);"
+                                class="fa-brands fa-servicestack"></i>
+                        </div>
+                        <h5 style="font-weight: 700; color: #222; margin-top: 60px;">Elite Service</h5>
+                        <p style="color: #555; font-size: 0.95rem; line-height: 1.5;">nance & support servicing, we keep
+                            your luxury car in flawless condition. With 24/7 roadside support and priority scheduling,
+                            your drive stays seamless—</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+    <section style="padding: 80px 0; background-color: #f8f9fa; position: relative; z-index: 5;">
+        <div class="container">
+            <div class="text-center mb-5">
+                <div style="margin-top: 50px;">
+                    <h3 style="font-weight: 0; color: #403e3e; font-size: 2.2rem;text-align:left;margin-top: 1px;">
+                        Featured Luxury Vehicles </h3>
+
+                </div>
+            </div>
+
+            <div id="vehicleCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
+                <div class="carousel-inner">
+
+
+                    <div class="carousel-item active">
+                        <div class="row g-4 justify-content-center">
+
+                            <div class="col-md-4">
+                                <div class="card h-100 border-0 shadow-sm"
+                                    style="border-radius: 0px; overflow: hidden;">
+                                    <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?ixlib=rb-4.1.0&auto=format&fit=crop&w=600&q=80"
+                                        class="card-img-top" alt="BMW M8" style="height: 300px; object-fit: cover;">
+                                    <div class="card-body text-center p-4">
+                                        <h5 class="card-title mb-2"
+                                            style="font-weight: 700; color: #222;text-align: left;">BMW M8 Competition
+                                        </h5>
+                                        <p style="text-align: left;" class="text-muted mb-2"><i
+                                                class="fas fa-map-marker-alt"></i> Lagos</p>
+                                        <p style="text-align: left;" class="card-text small text-secondary">617 hp •
+                                            3.0s 0-100 • Twin-Turbo V8</p>
+                                        <a href="#" class="btn btn-dark btn-sm mt-2"
+                                            style="border-radius: 25px;margin-right: 65%;">View Details</a>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <div class="card h-100 border-0 shadow-sm"
+                                    style="border-radius: 0px; overflow: hidden;">
+                                    <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.1.0&auto=format&fit=crop&w=600&q=80"
+                                        class="card-img-top" alt="Mercedes S-Class"
+                                        style="height: 300px; object-fit: cover;">
+                                    <div class="card-body text-center p-4">
+                                        <h5 class="card-title mb-2"
+                                            style="font-weight: 700; color: #222;text-align: left;">Mercedes S 580</h5>
+                                        <p style="text-align: left;" class="text-muted mb-2"><i
+                                                class="fas fa-map-marker-alt"></i> Abuja</p>
+                                        <p style="text-align: left;" class="card-text small text-secondary">Executive
+                                            luxury • MBUX • Air suspension</p>
+                                        <a href="#" class="btn btn-dark btn-sm mt-2"
+                                            style="border-radius: 25px;;margin-right: 65%">View
+                                            Details</a>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <div class="card h-100 border-0 shadow-sm"
+                                    style="border-radius: 0px; overflow: hidden;">
+                                    <img src="https://www.sarkinmota.com/images/cars/honda-civic.jpeg"
+                                        class="card-img-top" alt="Porsche 911"
+                                        style="height: 300px; object-fit: cover;">
+                                    <div class="card-body text-.center p-4">
+                                        <h5 class="card-title mb-2"
+                                            style="font-weight: 700; color: #222;text-align: left;">Porsche 911 Turbo S
+                                        </h5>
+                                        <p style="text-align: left;" class="text-muted mb-2"><i
+                                                class="fas fa-map-marker-alt"></i> Port Harcourt</p>
+                                        <p style="text-align: left;" class="card-text small text-secondary">640 hp •
+                                            2.7s • Iconic design</p>
+                                        <a href="#" class="btn btn-dark btn-sm mt-2"
+                                            style="border-radius: 25px;;text-align: left;margin-right: 65%;">View
+                                            Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="carousel-item">
+                        <div class="row g-4 justify-content-center">
+
+                            <div class="col-md-4">
+                                <div class="card h-100 border-0 shadow-sm"
+                                    style="border-radius: 0px; overflow: hidden;">
+                                    <img src="https://www.sarkinmota.com/images/cars/honda-civic.jpeg"
+                                        class="card-img-top" alt="Porsche 911"
+                                        style="height: 300px; object-fit: cover;">
+                                    <div class="card-body text-center p-4">
+                                        <h5 class="card-title mb-2"
+                                            style="font-weight: 700; color: #222;text-align: left;">Porsche 911 Turbo S
+                                        </h5>
+                                        <p style="text-align: left;" class="text-muted mb-2"><i
+                                                class="fas fa-map-marker-alt"></i> Port Harcourt</p>
+                                        <p style="text-align: left;" class="card-text small text-secondary">640 hp •
+                                            2.7s • Iconic design</p>
+
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+
+                                        <a href="#" class="btn btn-dark btn-sm mt-2"
+                                            style="border-radius: 25px; ;margin-right: 65%">View
+                                            Details</a>
+                                            </button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <div class="card h-100 border-0 shadow-sm"
+                                    style="border-radius: 0px; overflow: hidden;">
+                                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.1.0&auto=format&fit=crop&w=600&q=80"
+                                        class="card-img-top" alt="Range Rover"
+                                        style="height: 300px; object-fit: cover;">
+                                    <div class="card-body text-center p-4">
+                                        <h5 class="card-title mb-2"
+                                            style="font-weight: 700; color: #222;text-align: left;">Range Rover
+                                            Autobiography</h5>
+                                        <p style="text-align: left;" class="text-muted mb-2"><i
+                                                class="fas fa-map-marker-alt"></i> Lagos</p>
+                                        <p style="text-align: left;" class="card-text small text-secondary">Supreme
+                                            comfort • Off-road mastery</p>
+                                        <a href="#" class="btn btn-dark btn-sm mt-2"
+                                            style="border-radius: 25px; ;margin-right: 65%">View
+                                            Details</a>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <div class="card h-100 border-0 shadow-sm"
+                                    style="border-radius: 0px; overflow: hidden;">
+                                    <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?ixlib=rb-4.1.0&auto=format&fit=crop&w=600&q=80"
+                                        class="card-img-top" alt="Audi RS Q8" style="height: 300px; object-fit: cover;">
+                                    <div class="card-body text-center p-4">
+                                        <h5 class="card-title mb-2"
+                                            style="font-weight: 700; color: #222;text-align: left;">Audi RS Q8</h5>
+                                        <p style="text-align: left;" class="text-muted mb-2"><i
+                                                class="fas fa-map-marker-alt"></i> Kano</p>
+                                        <p style="text-align: left;" class="card-text small text-secondary">592 hp • SUV
+                                            with sports soul</p>
+                                        <a href="#" class="btn btn-dark btn-sm mt-2"
+                                            style="border-radius: 25px;;margin-right: 65%">View
+                                            Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#vehicleCarousel"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#vehicleCarousel"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+
+                <div class="carousel-indicators" style="bottom: -50px;">
+                    <button type="button" data-bs-target="#vehicleCarousel" data-bs-slide-to="0" class="active"
+                        aria-current="true" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#vehicleCarousel" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                </div>
+            </div>
+        </div>
+
+
+
+        <section
+            style="padding: 100px 0; background-color: #111; color: #fff; position: relative; overflow: hidden;margin-top: 70px;">
+            <div class="container position-relative">
+
+                <div style="
+            position: absolute;
+            top: 3%;
+            right: 20%;
+            font-size: 280px;
+            line-height: 1;
+            color:#10cfed;   
+            font-family: serif;
+            pointer-events: none;
+            user-select: none; 
+            margin-left: 100px;
+        ">&ldquo;</div>
+
+                <div class="row  ">
+                    <div class="col-lg-10 col-xl-8">
+
+
+                        <h5 style="
+                    font-size:15px;
+                    font-weight: 800;
+                    margin-bottom: 1.5rem;
+                    position: relative;
+                    
+                    color: #10cfed;
+                    text-align: left;
+                    margin-left: 5%;
+                ">From the GM/DP</h5>
+
+
+                        <h1 style="
+                    font-size: 40px;
+                    font-weight: 600;
+                    margin-bottom: 1.25rem;
+                    opacity: 0.9;
+                    margin-left:5% ;
+                    z-index: 1;
+                ">LUXURY REDEFINED, PERFORMANCE UNLEASHED <span>,IGNITING YOUR SENSES</span></h1>
+
+                        <p style="
+                    font-size: 1.1rem;
+                    line-height: 1.7;
+                    margin-bottom: 2rem;
+                    opacity: 0.85;
+                    margin-left: 40px;
+                    
+                ">
+                            "At Aswaad Auto, every journey begins with unparalleled craftsmanship.
+                            From the whisper-quiet cabins of our flagship .sedans to the thunderous
+                            roar of our track-ready supercars"
+                        </p>
+
+
+                        <p style="
+                    font-size: 0.9rem;
+                    font-style: italic;
+                    opacity: 0.7;
+                    margin-left: 30px;
+                    color: rgb(243, 241, 234);
+                    font-weight: 700;
+                ">
+                            <span style="color:#10cfed;"> --></span> Aswaad Black.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+        <section style="padding: 100px 0; background-color: #f8f9fa; position: relative; z-index: 5;">
+        <div class="container">
+            <div class="row g-5 justify-content-center">
+
+                <div class="col-md-4">
+                    <div class="text-center p-4"
+                        style="border: 2px solid #ddd; border-radius: 0px; background: #fff;border-color: #797575;">
+                        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.1.0&auto=format&fit=crop&w=600&q=80"
+                            alt="Luxury Sedan" class="img-fluid"
+                            style="height: 220px; object-fit: cover; border-radius: 12px; margin-bottom: 20px;">
+
+                        <i class="fas fa-car-side" style="font-size: 2.5rem; color: #0d0d0d; margin-bottom: 8px;"></i>
+                        <p style="margin: 8px 0 5px; font-weight: 600; color: #222; font-size: 1.1rem;">Our Premium
+                            Sedans</p>
+                        <p style="font-size: 0.95rem; color: #555; line-height: 1.6; margin: 0;">
+                            Silken power from twin-turbo V8 hearts, 0-100 in 3.2 s.
+                            Hand-stitched Nappa cabins with ambient light that breathes.
+                            Air-suspension glides over Lagos potholes like glass.
+                            MBUX & iDrive mastery — voice, gesture, thought control.
+                            Premium isn’t a badge. It’s your silent throne on wheels.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
+                    <div class="text-center p-4"
+                        style="border: 2px solid #ddd; border-radius: 0px; background: #fff;border-color: #7f7b7b;">
+                        <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.1.0&auto=format&fit=crop&w=600&q=80"
+                            alt="Sports Coupe" class="img-fluid"
+                            style="height: 220px; object-fit: cover; border-radius: 12px; margin-bottom: 20px;">
+
+                        <i class="fas fa-bolt" style="font-size: 2.5rem; color: #0d0d0d; margin-bottom: 8px;"></i>
+                        <p style="margin: 8px 0 5px; font-weight: 600; color: #222; font-size: 1.1rem;">Performance
+                            Coupes</p>
+                        <p style="font-size: 0.95rem; color: #555; line-height: 1.6; margin: 0;">
+                            Performance Coupés – Aswaad Auto
+                            0-100 in 2.7 s — asphalt melts under 650 hp fury.
+                            Carbon-fiber spine, rear-wheel grip, launch control heartbeat.
+                            like a surgeon’s blade.
+                            Adaptive LED eyes slice night; exhaust roars symphony.
+                            Performance isn’t speed. It’s your pulse in metal form.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="text-center p-4"
+                        style="border: 2px solid #ddd; border-radius: 0px; background: #fff;border-color: rgb(136, 131, 131);">
+                        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTExMVFhUVGBcYFxcYGBoWGBcVFxUXFhcVFxcaHSggGBolGxcVITEhJykrLi4uFx8zODMtNygtLisBCgoKDg0OGxAQGy0lHx0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tKy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIALcBEwMBIgACEQEDEQH/xAAbAAABBQEBAAAAAAAAAAAAAAAFAAIDBAYBB//EAEYQAAEDAQQFCAUKBQQCAwAAAAEAAhEDBBIhMQVBUWFxBhMigZGhscEyQlLR8AcUFWJygpKiwuEWIzNT8SRDstKToxdzg//EABkBAAMBAQEAAAAAAAAAAAAAAAABAgMEBf/EACQRAAICAQUBAQACAwAAAAAAAAABAhESAxMhMVFBYRQyIqHh/9oADAMBAAIRAxEAPwDzWtamwylixoMvIcagJGTmAnokyJAjIbwq1oe14nG9OJw6Q367069+5HtNaAaAytZ2ValI0wXlzWjmn+iL9xxwOBkwMzllnzREkBwwHacBhvxUgOstie8Pc0AtpiXasyQMNpMDiQoDjxVmx1nM9EYmZzPRIIdgPHVuSqWV8yWOF44EjN0wRJ60hEAduyUdNhLoEayMYyE61PWDSBdBBjpSRBxPo6xhqxUR2bO3/GCBEjHyAIHGIOO0q1QsTntLmhxu4ugTDZDcT9ogdYVEFFNE280DepmS9jmVA9oc2CWkQDM5TjlHWpGeq8lrPYhZrNStAo1H1ILSJvSC4tvSARF4Di7ZCI8oaIs9ahVp1mWekCb4IkOcB0WkEGAW3xIyK8yslvfzjarCGDBoa15hou3YEuJ1a1JpW0VKzml5vielexOGvHr7UKVjPbBpVjmX21WlhEyCIhec8sdPF1V7cRc6LROD2Pa05g6zB1g3cVmsBAbq1aoVGo4zenHUdWBn46lOpK+BUGdDaSdTaWCHc4W3cbjZiHCD0TuwIk47Ey2VXPc97qjoeTi4AXmtLbp6JgyCIjCQNqCmqc7xnA444+eQ7E99odiZzAEwMAMI3BRfAyw94EC7dLcxjBJydjujXjI6z2guVr7NTNMtdUMl2d0MGAx6JzOOG1Zn57ublGWB460qVYD1ZOvHCMMh8ZpDs2tu5c20SKdKgIN30jUIJEgQS07cYjBALbyw0i70qrmA6mNa3UDgQJyI1qhTtxDYIktMgnIE698Y4bzujlS0NIIMgAC6Tu2QYHXOZT6DJlK0W+tUP8yrUd9t7neJwUDkRspY1zSTOBmSR0hMYjUcMFO91OPVdENkgAnpEyABhmBjq4BOwsCVTBiVG60wNs5QJKm0uy48CcJmQcYxAGBI2bVDeEAwYjNUgsidaTMBju4eaaa1SJugDec1LVedRIjOR4d3aq9Y59LiFSFZ1r3kYujgPelze1zj1x4LrRAHBOCtCtlfR9MOBLhJnXir7ABkAFQ0fgCN6tyqsTLAehTx0jxPirl5VyBid/vSscUGdG0ug07hCs13wBO1Q2J4FNuIwAVa11ZHWkMmLmnYUzQ4H8yPb/S1US9XNAejU+3+lqT6Kj2Ekl1JQaFKycpnsp1GEF/OsuODj0RhAe2MQ/LpZ4QhL3MODREXjJnEHJsDL9yqwhOL1oYht1veGOusY2WObUfHSqNqQTLicTgDh71TsVuutuRgZ6REkT6RE6uEdqpPrOcAC4wMgTgOHae1Ki8a+rijoCQkXnGM5MHKDmP8RCrAqQuLjvyTbSyCBGrzx78OpADmk6vgqagATiY9+xV2VI7Oz3qVhJM79mvZxxUtCCVGqRkSMNpzVpt4twqXdmvuVCIjeMjwVqzXn+iHOjYC7wCwt3aAtEVMIdide3eO5R1WVMSRltw8cvjrsUbPVMSwgSMyGmJ346yiLqgLQHm4QcfrAjPiDjvGCuOnJ80xZIz5c7MgDBNqP1Qr1WljA1QNURMXtmeafaWC6RJvARF3XIgBwmRGtPFsrgHMrRmNWv4wXG1xrKLPsTGxjJOYwBHGe7CCDKFmyuAmMJ6+xLFhwPbVHwE12e74xUlisxeYDS4xPqtGYn0iB/lE6HJ+ufUbjteweF5GLAClwnA/srNNszGRy1+KmtmjCx92oGNdhlLgd8hvxCTNFtvNaam2bjHOO6BOOElUo0AMtoN4QJHVgojMYydU7/iVZ0pZubc4TIExvExOBjbrXLGxt2LpJORk4ZaoxGfYlQFSo7bjHEblHAdOQhpPHD/Cnq0siJ8pnIKvTc0EhwJ6JggxGIzGtNAKkMBwClhRtOAjLVtUgIViK1lGfFT3VDY8ncVPKYn2OYAq9U+PvU15Vqp8UFRL1N0sbOoBR1mCMgnUPRHBcr5IAruHHtKJ8m/Qf9v9LUNKJ8nPRf8Ab/S1D6Kj2FYXUklBdmNhWaQBBAGMGYx2Ea88FHWj42Y5phdsGpaGQ99MgbjjnvjJcpicIN44DjKKWG1sNF1Op0jLbgxgTIdwznLOFQtDQKjsMJIx3HdkpAYaZBMGC2QcdmBxGrNS6RrFxF8Q6Mc88zgciTnvCsG0SXEwS6ZBxB14jI4p2m2tvBwMyGndlBbnIyG1CY/gPqUrri05gkbRIJ1jNX9G6JqVqlOizEvOAMgb3cABidyGtdn19hXq/wAl+jAKT7S6bz+gyfVZg5xH2jd7BtVKLk6M5SxVljRPIujR6Vofzj4ya0XWa4l8k8YCnfpOjecylZy7m4BLnNgHAwXOBM46kQ0/a+bpkgS7ANHtPcYY3hJE7kM0ZYebpATJd0nO1uLsbx459a6I6UY8I53NvllbSGnjTaXGg3MBrQ9xLiTAGQjEhXdHVadomm+mGvgesXAguDSQSJBF4FAraznLSG+rSbfP2nS1g7A89YRLk+YtLOvuE+SpquhcUY+vpSoxz2TN17x1BxAUDtM1PgrvKmjctlpZsqHvg+aEOBVZseEWEzpeptCR0tU2hCC5Nvo3JD24hc6XfuS+ln7AhF9dpguIAmTkEZse3ELt0o4+q346lLZ9LOa4ODWyPgjJBywjUO0e9cdUwRmxPTReBaXPc9t++SSDqmZiCIzXKlRzTNIubhF2cMRGBz+M1RFZWXght71SY7p81nOMZdlL/Hop867Ea9u0bO5QF2/UrjmgnMgnv/fxVd9LpOE5Mce4Lmem0zZOx1NykUdPEAqVCQylQ18VNJUNn18VMEwHAFQ1E8FMqFA4lygDdGWSbaZjVmpbP6DeATLTkgCqSi3Jz0H/AG/0tQlyK8m/Qf8Ab/S1JlR7Cy6uJKCzHXilKS5K0MCei5zDLXEbCCRu1JtQkmN5+CuMdhHX3J5qZnhGSnkY17CPjco52nqUocdqje7HJNAWNGWcPqBpmDnGwYnuXtnJqu1llaDhEuP3pMDfA7lh/k75HG1MqVXOdTYeixwaCcDjn8YLe2rk6QGtZUJa1pbdcMzEXgdRiNXitISSfJlqK0BH2oWms1vqt1Tm6peBPVSFQj/7GIlpq3MotDnmA4kNiJkDZMxvVPQmiuYcXvDrxvkm66JLgGxhqY0CVmeWlrdz4BaS0DA43YJyxHROeEnLUt1L0yxt0h9HTVGnzriS5z3l2A9UANY3HY0DrJR3RYHPNdOpxG/oHyXnT60+r2GVsqlou/N4Ikhka82HHwTbTXA2qBvyhUruk7R9a478VNp8lmqwXpvK3QNO1vZaG1RTqFrWunFpLRGOOf7LMWnkTaMbj6bxuz74SjFtcCziuzHuTNaPV+TVZh6bXD7sjtBU1Pk4146NcB2x1MgfikqtuQ9yJmi5WdHf7jvZYY4u6I8Si9XknXGMhw2sAd3TPcmDQ9R3R5w4QIuARGQI96W3Ie7H0FtOChr/AB3oz/Dz/aP4Qnt5NVDh0nYEAXdfUjbkG7Ez0q7TqzRjY/uIw8Cr45L1TlJjYyY7Cm/w5VA9LAxmwjLr3owkG5EoBmrblx8lG1uLyTjzbgd+wjsxCI/Q78jUYOrylWrPyddUIcKzMDjIIMa+jm4cJSem2gWol0B7LSloIczLKYPeuvbGfiD4IjpHk2+i95Y0upzgZBjcdmrPvQw03tJDmubhhIw7VM9OKj+jjqNyr4UbOc+KsBVrOc+KsNzXObktxV6ivhqoVszxQhl+gOi3gmWoYDipLMeg3gEy1nAcfJICmUW5M/03/b/S1CSi/Jgfy3/b/S1D6HHsLQkkV1SaGVqMIaNpk+XkexR3Vqq+iRdvZySMB7LruHF2XEqjX0QZjU30j9bM9QGvjtCFqJkYgFJXfmjnYgYat+8+5Vn2dwOI81akmTRGSmlIpKgN5obSVppt5unaHsaBg0GBk0DDLKEd+mLS1rSbY/pODGC4114mC4gluIAxKzdmIbUvm7A2kAExljhr8ERrcr67GinTa2kGF0es8ST67tcGJW2N/DmfBt3We2jK003/AG6Mf8XBU6Wk6rnc242V7y29dF9st1GYcOrNYmlywtTTPPkzqdBHZCv6L5VUWVXVXWVnOO9J7HEagDdY6Q2YxgiSltyQZIK6e0JTrsIfZrj9T6JDiDvlrZCAaA5O1mEmo6WskMG92ZxGGGw6ytpY+VNjqwC80zsqCB+ISO9EDZm3ejBBJxmdgAHf3KVJrsbVqihoOg0EglsRkSMeo5onU5NUHmYcw7WOLe7LuQ20aOBQi3WmpZmlzKrmgETBMQXAHAHYStot9pnO4/A9pXRdSzMv37zBrJgjiDgepZp3KOzHB5bxGB9yCco+Vzq4FN9SrUa32TTaJ1yObJPWVlqj6JOD6o4sY79bVsp8ciw8NppLlHQYRdN8HZOHHUqVTlXRMTTMjcMtmeW5ZKq1gEtqFzvZdSDfzCo7wUAtP1T2xPCRipeskaR0W/puW8saUei7s/dRu5YU/Zd2D3rFm0D2XdoHiMVz5wPZd2jwiUv5CK/jv02D+VlM+q/4603+LGbKnCcOyVkW1p9V3aE68fZf3I314Gw/TXHlU05td+FpTTyjpHOn+QeRWUbeOTXqN1cgxDsM8cuqJQ9aP1Bsy9Ni7lJSOpw+7+6qVdLWciOb49GPByzBr7j2+OGCa60nYe3zyKT1oP4C0ZrphY2KzvJuE09czhOyDM9oQyvTLHXSZ2OGRUuj616b5LQJiGXyTsgvbCsk03CAHuOcktAEY+iATt9bWspqDjcS4ympVIjaOPaVSqjPirZmVVq+a507OhFqgBdGAyUNrAEYa0+l6I4KO0CQOKYFUo/yY/pv+2f+LUCLUe5Mf03/AGz/AMWpS6Kj2FSkulcUFmmbSBiMAxsAbA0XRJPWfv8ABDdI0QW3R6OrPpk6+GOW4Tu4LaMtoxz4Ce0rj7QDn1b/AHLzk2h2DnADogTwy4qnabIXDGBuyniBirlptIOWChDhtHatINrkhsC1tEn2m9/uUX0Q/wBpvejTwPaalZ4vtl7YkTjGE469i3WqyGU+UFuLKgY2DAEnjj8HgiuhLCLQGPOV2DxBgDjq+6VTr2AG3VL7Q9lK5LXEgO6LYvEEQDmcQthpCgygH/N23KZp84xg9QmQ5u8teHidwXY5yrghQXbIRomzNkENmMiQPCFBbuTtN4vM6Du49ayQeSSZMnXKI6O0w+mc5brHx4pvR1I8pk7kHw0K06KrMzHWdfXl3qfRuma1BpuVC0HC7gQIiTBGHUtHTtAIvAy1w6uCwnLF4a8MGAz6sYB657k46zfEglopco2GiuVFR0tqOadhwBxw1YEZb8UP5Q6XdcdBxOXViPALKaNsFpbD+aqc2c3EXW7nCc+pW9KVCSZPwRI8VvCUWqOfUg4uwro/QtO0WeyH0alV9RrqgEkkFoEjXn3rNNthBjOMHA47jBOK2nI13+msZHqWisOBLqRGo7dhWHew3nTMugnVmNnGVz3R10TVa4cMGNbvCr3YJ+sMImeGGOAMdSfTU9Wn/LmMp89x36tS0kuDKHDoqkYkAaxMZ9YbJHWE0e/f4THa1Oe2RugHd34D8ISOoHbhO/YSfCVmbHC6RkMsxx2zH5upbPQHKOm2zUqNSs5lSm5wlwqFrqcyxocyYImJIIA2rGY5a4OGvvE/lK6T4jw15+DUmrGuOT0OpypoUntcarnRJdTY51W9hAkxdGOODhvXnJe4kucZcS4uJx6RxJnHWTmWpzicz5RntmPzdSTth38erI9koQN2cvHt93xk4pOwx4TnPo68jHUU67nGeM9kY69esFMqMybtIw6hO4djUxFqzU4Zl/nX3ovoGwU6lN73E3v5jWgxdBaxr7+cmA7ZG3UqFWmQ0nd3o9yXo/6erudaBrjCyRw9U71U+jOPLdl7+BH3cLRSLhvwjHDbsVOp8nNrOT7Ocf7jv+i2bWUCB/p+xw8yFKyy2b+w8cLh/UuF6jXR1x01RjR8ndtHRYaLhHtEFNqfJtb8opfiW8ZY7Jrp1R91h8AVco2Sx5xUH3D5BLekVto8z/8AjC37GdTgfNEdE8gbdSaWmkDLpwc3YBt3L0SnY7L7VX8NXyClFloDKpVHVWRvSFtpGBPI23f2PzN96S21WvSBI5yr/wC4eaSW6x4HjjLXd2fHcnNtE5oMKo1eSeyrxScDBsN03gkYHqxR7R9FhIBc4Eaix2H5FlKDwc9u+VpdCviIMxHRBg9U6+5GNIqJqbNoprsJf/4ifBpVg8n2HU4//g//AKK7oWrMQROtrgWO7sD2StHQPEbswp5NqR5FpaxmnaKgcCDWF04EerDTjGxjo3qI6QmpcdqBjgCPNxPWtbym0pZ6Vre21MFSmW0uiZEO9V7XNBIcCQBgBjmF5xyw/lWhjqc3YJaTmWX3DHUTmDGGGuF2x5SOd8MPVLBSfjhPUe/NDrboYM155Q7Dv96o0tIAkyajY2XXDrY4Bze1EaNtBENrNcT6rpaT91/vVLOPTIai/g7RRdTBY4y3MYEEHghGkKJfa3EReF0MmIaQAS9xOAAnt4IqMHYiNwOB3gHyQi02i7eqvBAc50fWFPC6Dvd4IfdjS4otAPZVNMVn8/JEerUIBJEzjI9oRwQrTBxacpaMNhBLYI1HAYK5ZgX1aNfMyA464EAncS0d6i0m11odea3Fz34cTJ8Fen/YjU/ryaHkE1xsogeja+HpNo7xrbtWQ0kYcMBN0TjlnGQ3ovS0s+z2d9m5tpLnh5JdMQAAABw2oA8Ekk5nNPB30Gca7O2Uy4zMTqxRh9emWhoMRESD4oOylCL2XR4Db1UxuJjtPktcUlUjDJt3EofNBqJGwXmGOBkOXPmhkkE47GjvIfLuuUWNOzbW/j/dNu2baz8f7qMYGmc/ASLGYiTwuQMdrQ6EnWd2G76ru7YixFl9pn4/3XD812t/EfeljEM5eAnmHTr7HB230oCXNGCIz+qI6xeg9aJPrWYa29pTfnVAbO9VjAM5eA75q7d+XukmOpTWeyG8C45bSDG2ICtG30dXgV36Qo/APuTS016S5an4NtrugTq+CjvJJgNOoJH+8Y9aHUKpw1xDhrjjmgNoAcLzTI2bOpT6Kt1azghrui6RdnAtIIhzYxIBMHeUpxvmPQac8eJ9m6o1rWAI5kiBEh0xqnerLLZa/wC3RPWR5rJO0tWaT/IcROBBcMNWo6lIzlM8Z0qo6z5gLilE7UzXMt9p12ameD076TrDOxg8Hj3LMU+VzdfODiGnzT7TyxaALrj1sUYl2aT6YdrsT+og+Sjtmm+gYs1ZrtRiYxCx9Tlw6YaXngxqR5V1z7YG3+XHcmtP8Fmgv9P1PZq/gSQV3KmrPpv7R7klW3+CzRkmEZgq1Te3rR3+E34STB1tA8neSsM5INGJZUMfVd5DySbi/pOL8A1B8ZHqRzRltYPSlpEdKL47NikZoFo9Wp+F3uT26Hb9fsPuSxT+jpo2GhdMUMJN0+2ybp4tjA9W1ayx22k4YPad4IH+V5SzRwGt4+OCv0GAeuOsNnwUuC9LTLPL9zadqdUgOc5lJrJyaSXC99rogDZeJzAWO+UXmxWpMpAANoUpI1ucwFxO1168Sd61dWzUapcHubfDGvpEm6C+k89AmYxFQux/t6sV5vpm1OqVLzzJDWMn7DA3y7l0R/qjBrkZQ0kYuv6QGUi9HbirbS14lp77w65x70EgkhrRJJAA2k5DtK9c0ZyEsFIhzudecMHP6M8GgSOMolPHscYt9HnlOm8EAHCQMDAxPsnBGrLpRjaNIVBTfTOLqVQXAb3SltTEB0k5gcVtdJck7JUa4sDqboMXHdGY9kyAOELBaF0bSqUWVbU4totuwxn9Wu+COapeyMMXnBo7iMsglHEP2ex2NzL1j5xhMjmn9Jt5zqYF2q0ljWw6qTLp6GAiYB2zRhosaIebxcS4gBjjI/o6ywAgXjmZjBG9EVBaKrWFwo0OcDAyh0G0g2XEMkw97Q8nnCCZvbUE0rUrmvXpVHk8zVdTa3IC64tMbSYGatOnZLV8Axj26wT1SpQ+ls/L+yidfYelhxw8U+nacYvN7lWZGC8J2Wii3EDEfVPuQ21Wlz3dLsxgbhv2q861xmWdgQa0W1hJIpMknPpR2AhGVgo0WOeI6/tLlS0fGPvVL50PYYO3zKcbUNjOw+9FL0dvwsvrnbHb5ldo2dpZfc8jEjbkfFVPnf1Wdh964+1TmGx1x2BDS+ME34KoWz0ZO8wO5NgfELgrwZAb3+9P+fHY38KEl9YO/iGkKam0GQXNbgc5zGoRr37s0w6QdtA+6FG62vOvuHuQ8fgll5/v/hfs9Vzmy0w7J41HY4b4zV6wWa89oLxiRhDtu2ECFpcdZjd+yu2Ku5hvg4tmOMEDv8E74DHk3Qk4gmDj2rvS2la+jyYaGMBLgQ1oORxuiU1/Jtg9d35VyvUidCgzKhzt6Y6iDmxp6mnyWp+gW6nO7AonaBGp5/D+6W7EeDMyyxUv7TPwN9ykNjpf22fhHuWhOgHaqg7CPNRu0I/2m9/uRuRDBgIWGn7IG4SO4JI19Dv2t7T7kkZoeIW0fa6YAhxDjiYuNniYBKM2WvTibxJOrBYNjHg4d2H7ohZ9JVG5z1rBw8NLNsKdMmYAKZUsDXag7x7VnqOmTsPgiNn0xI/dRTQy0dFgZSNxXDowR8eS5T0oNo7cfBWWW8HX3osKAemOTjKzCxwI1gtzadolY61fJYXYttJG4sHeQ5epCsdTSUm1SfVhVHUkumJxTPJbL8mdoo1G1G1aT3NMtvBwEjIxByRG16I0kRlSw1sIaT2gL0y4ummE91iUUujx+roTSIx5tx4VGdwvICyhWuVKIa5r6LjLSCHNbWIN67ExJjgQve3U2rD8uNEVadanpCyNvVKQuVqcXucpY5t9YQSCNkbFrpavNMjUg64MFUrCzOs1J+ApuYKsn1qrWvrSd3OkfcUnLi2NdXLWuvuAZzlUiHVKjWgX3AYXoDQSMy0nBR6U05RrOv8AzaasyC580wZmTTuAvdvc4jKQVnrRWklzjJJJJ3nEldTZgkRxLpOe1V7SBKeamOCYWSkVRAOpdT3NhIMRY6Ghm9ObS+t3JXEriLCiZllafX7v3UzdHtPr937qoAU4SnaFiW/owe33KpbLNcIxkHXvT2vcuueSIcJRaDErMpz5qRoYN/FRcy4ZArooO9kosVFoVRqRLQhHOsJF4NcHOGUhpmOvzQqlZnk+jG85I5YaFwYGScz5cEAkemM5cNOdM9oPkrNPlZTdnA4l3kxebseVOwneud6MTZSZ6VT03TdkW/8AkaP+UKyy0E4hhPB1M/qXmrFMyRkoekh5nopc7+278n/ZRPcfYd1R71jKFvrNyqPHWfNEKWnKwzIPEDyUPTZWQe+cH2H9gSQoaedrpt7SkliwsT7W+JrWBx3s6XX0FVOlrMMCKtI7HNJA7Qtu1qecRBEjfipUl4OjG2e2UHHo1aR6i3wIV5lIHUDwg+MIxaNEUH+lQpfhCpP5LWb1WOYfqOc3umE7QcjaVI6vAjzIUzKbvgAqn/D7wf5dpqgfXDX9+CkGjrY3KrSeN4cw9olKl6Oy+0uGeHUR4qzStTvaPigfPWxvpUA7eyoCfzNaV0aaDf6lCu07bhI7cUYhZom2gn1u5SNqnj1rPUdOWZ+VSDsJg98K/QtlM+i8HrSoAoH7k4PGpVBV2HvT21ju6kgILbyfstYzVs9F5Ot1Nt78USgds+TiwPyoXD9VzgOyVp22hSCqqUmumKkYGt8llm9V7x1jzCpVvkrZ6tR3WAfcvSudKdzh2K1qy9Fijyo/JW7VUHWz3EqtV+TK0j0ead98g94C9dvJpcN6e9IWCPGX/J9ax/szwc0+aiPIu0DOhU6mz4L2qU5rRtVb78Fgjw1/JqoM6TxxY73KI6GjMEdUL3kjemPHWnv/AIGB4SNEhPGiRs7l7XUstM5saeLR7kx2i6B/2af4R5BP+R+CwPGW6JGwqVuiNy9ZdoWz/wBpvVI80x2hLP8A24+873o30GB5gzRW5PGjNy9IOg6J1EdaY7QNL63b+yW8h4HnrbBuT22Pct79AUtru0e5L6DpfW7R7kt5BgYltlUosxWxOg6X1u0e5NOhKX1u1LdQYmRFEp4pblqvomlsPaU4aOpD1fH3pbqHiZgUklqvmdP2B2JJbg8Qrlkk2dYT3OGpNklZlDucC61861G9icwwkA7NcNPeuBy7mgBrhCjuk5KUtXJQBTtFiY/02Md9poKov5NWc43C3e1zm+aNELt1NNoKM/U5OtybXrt2dKfEblz6ItDfQtX4qY8itE0Jr2oyYqAzPnjB6VN53S33rp0laRgbMTva5pnv8UU5tPaCEDA55RNaP5tKrTOMy0mIEnKZVqjp+zugio3HASRn1lEhO5QVrLTd6VNjuLQUcCH0rcw5PHaphXGoz1oPW0FZnYmnB2tJb4FRM0AwEXKtZsar14d+PejgA/zoXOdWedoq0t9G1gjY5kE9YJx6k2Lc3+1UG50E9oRQGhc5M5zis67S9qZN+yPgCZYbxnZA+MFO3lBSxvFzYzvNIg5axuKKYWGi9K9vQujpak7KqPJWufb7bSkMtXkr+9RNdw7V0AHclYEt5KAoSI1jvTS9FgTGEwtCYKqa+qmAncUg7YmOKYdyAHOadqbcK6Ada44oAQYdiSYSdvekgAuQFGSkkmI4EroSSQA0lcDikkkM6HJ6SSAOX12UkkxHA5dlJJIZ2VxJJAjl1KEkkwOEJjykkgYwlLFJJIDrqxBhMfVnMAjYRKSSAKr7FQdIdRZjnAA8FFU0BZ3QQxzSMiHuEcMcF1JCkxFY6GaybtesPtG8BwwUQs1pb6NZrh9ZpB7kkk8gSscLZamnpU2Eay12PY6FV/ipgID2kSbowBk4bDvSSWkIRkuSZSaL9LTtI7Z2QVc+etiZISSUSikUmPp1gciD1JPEakklAyN1VQVKySSYDOdXEklVDP/Z"
+                            alt="Luxury SUV" class="img-fluid"
+                            style="height: 220px; object-fit: cover; border-radius: 12px; margin-bottom: 20px;">
+
+                        <i class="fas fa-shield-alt" style="font-size: 2.5rem; color: #0d0d0d; margin-bottom: 8px;"></i>
+                        <p style="margin: 8px 0 5px; font-weight: 600; color: #222; font-size: 1.1rem;">Elite SUVs</p>
+                        <p style="font-size: 0.95rem; color: #555; line-height: 1.6; margin: 0;">
+                            Command the skyline with 600 hp under panoramic glass.
+                            Terrain Response II conquers sand, flood, or city chaos.
+                            Massaging thrones, 22-way power, cooled, heated, alive.
+                            Level 3 autonomy — eyes on road, hands off wheel.
+                            Elite isn’t size. It’s sovereignty in every terrain.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section style="padding: 80px 0; background-color: #f8f9fa; position: relative; z-index: 5;">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h3 style="font-weight: 500; color: #222; font-size: 2.2rem; text-align: left;">Our Expert Team</h3>
+                
+            </div>
+
+            <div class="position-relative">
+                <div id="teamCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000"
+                    data-bs-wrap="true">
+                    <div class="carousel-inner">
+
+
+                        <div class="carousel-item active">
+                            <div class="row g-4 justify-content-center">
+
+                                <div class="col-md-4">
+                                    <div class="card h-100 border-0 shadow-sm"
+                                        style="border-radius: 0px; overflow: hidden;">
+                                        <div class="card-body text-center p-4">
+                                            <div class="mx-auto mb-4"
+                                                style="width: 90px; height: 90px; background: #dee2e6; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center;">
+                                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none"
+                                                    stroke="#6c757d" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round" margin-right="70%">
+                                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                                    <circle cx="12" cy="7" r="4"></circle>
+                                                </svg>
+
+                                            </div>
+                                            <div style="margin-right: 70%;"> ⭐⭐⭐⭐</div>
+                                            <h5
+                                                style="font-weight: 700; color: #222; text-align: left; margin-bottom: 8px;">
+                                                Dr. Michael Adebayo </h5>
+                                            <p
+                                                style="text-align: left; color: #555; font-size: 0.95rem; line-height: 1.5;">
+                                                20+ years in luxury automotive leadership • Visionary behind Aswaad's
+                                                growth
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="card h-100 border-0 shadow-sm"
+                                        style="border-radius: 0px; overflow: hidden;">
+                                        <div class="card-body text-center p-4">
+                                            <div class="mx-auto mb-4"
+                                                style="width: 90px; height: 90px; background: #dee2e6; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center;">
+                                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none"
+                                                    stroke="#6c757d" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                                    <circle cx="12" cy="7" r="4"></circle>
+                                                </svg>
+                                            </div>
+                                            <div style="margin-right: 70%;"> ⭐⭐⭐⭐</div>
+                                            <h5
+                                                style="font-weight: 700; color: #222; text-align: left; margin-bottom: 8px;">
+                                                Engr. Fatima Yusuf </h5>
+                                            <p
+                                                style="text-align: left; color: #555; font-size: 0.95rem; line-height: 1.5;">
+                                                Certified BMW & Mercedes specialist • Ensures precision engineering
+                                                standards
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card h-100 border-0 shadow-sm"
+                                        style="border-radius: 0px; overflow: hidden;">
+                                        <div class="card-body text-center p-4">
+                                            <div class="mx-auto mb-4"
+                                                style="width: 90px; height: 90px; background: #dee2e6; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center;">
+                                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none"
+                                                    stroke="#6c757d" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                                    <circle cx="12" cy="7" r="4"></circle>
+                                                </svg>
+                                            </div>
+                                            <div style="margin-right: 70%;"> ⭐⭐⭐⭐</div>
+                                            <h5
+                                                style="font-weight: 700; color: #222; text-align: left; margin-bottom: 8px;">
+                                                Mr. Chinedu Okonkwo</h5>
+                                            <p
+                                                style="text-align: left; color: #555; font-size: 0.95rem; line-height: 1.5;">
+                                                Top performer 5 years running • Personalized luxury buying experience
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="carousel-item">
+                            <div class="row g-4 justify-content-center">
+
+                                <div class="col-md-4">
+                                    <div class="card h-100 border-0 shadow-sm"
+                                        style="border-radius: 0px; overflow: hidden;">
+                                        <div class="card-body text-center p-4">
+                                            <div class="mx-auto mb-4"
+                                                style="width: 90px; height: 90px; background: #dee2e6; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center;">
+                                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none"
+                                                    stroke="#6c757d" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                                    <circle cx="12" cy="7" r="4"></circle>
+                                                </svg>
+                                            </div>
+                                            <div style="margin-right: 70%;"> ⭐⭐⭐⭐</div>
+                                            <h5
+                                                style="font-weight: 700; color: #222; text-align: left; margin-bottom: 8px;">
+                                                Mrs. Aisha Bello </h5>
+                                            <p
+                                                style="text-align: left; color: #555; font-size: 0.95rem; line-height: 1.5;">
+                                                100% client satisfaction rate • Your journey, our priority
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="card h-100 border-0 shadow-sm"
+                                        style="border-radius: 0px; overflow: hidden;">
+                                        <div class="card-body text-center p-4">
+                                            <div class="mx-auto mb-4"
+                                                style="width: 90px; height: 90px; background: #dee2e6; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center;">
+                                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none"
+                                                    stroke="#6c757d" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                                    <circle cx="12" cy="7" r="4"></circle>
+                                                </svg>
+                                            </div>
+                                            <div style="margin-right: 70%;"> ⭐⭐⭐⭐</div>
+                                            <h5
+                                                style="font-weight: 700; color: #222; text-align: left; margin-bottom: 8px;">
+                                                Engr. Tunde Lawal </h5>
+                                            <p
+                                                style="text-align: left; color: #555; font-size: 0.95rem; line-height: 1.5;">
+                                                Nationwide swift delivery • Zero damage record since 2018
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="card h-100 border-0 shadow-sm"
+                                        style="border-radius: 0px; overflow: hidden;">
+                                        <div class="card-body text-center p-4">
+                                            <div class="mx-auto mb-4"
+                                                style="width: 90px; height: 90px; background: #dee2e6; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center;">
+                                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none"
+                                                    stroke="#6c757d" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                                    <circle cx="12" cy="7" r="4"></circle>
+                                                </svg>
+                                            </div>
+                                            <div style="margin-right: 70%;"> ⭐⭐⭐⭐</div>
+                                            <h5
+                                                style="font-weight: 700; color: #222; text-align: left; margin-bottom: 8px;">
+                                                Dr. Michael Adebayo </h5>
+                                            <p
+                                                style="text-align: left; color: #555; font-size: 0.95rem; line-height: 1.5;">
+                                                20+ years in luxury automotive leadership • Visionary behind Aswaad's
+                                                growth
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="carousel-item">
+                            <div class="row g-4 justify-content-center">
+
+                                <div class="col-md-4">
+                                    <div class="card h-100 border-0 shadow-sm"
+                                        style="border-radius: 0px; overflow: hidden;">
+                                        <div class="card-body text-center p-4">
+                                            <div class="mx-auto mb-4"
+                                                style="width: 90px; height: 90px; background: #dee2e6; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center;">
+                                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none"
+                                                    stroke="#6c757d" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                                    <circle cx="12" cy="7" r="4"></circle>
+                                                </svg>
+                                            </div>
+                                            <div style="margin-right: 70%;"> ⭐⭐⭐⭐</div>
+                                            <h5
+                                                style="font-weight: 700; color: #222; text-align: left; margin-bottom: 8px;">
+                                                Engr. Fatima Yusuf </h5>
+
+                                            <p
+                                                style="text-align: left; color: #555; font-size: 0.95rem; line-height: 1.5;">
+                                                Certified BMW & Mercedes specialist • Ensures precision engineering
+                                                standards
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="card h-100 border-0 shadow-sm"
+                                        style="border-radius: 0px; overflow: hidden;">
+                                        <div class="card-body text-center p-4">
+                                            <div class="mx-auto mb-4"
+                                                style="width: 90px; height: 90px; background: #dee2e6; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center;">
+                                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none"
+                                                    stroke="#6c757d" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                                    <circle cx="12" cy="7" r="4"></circle>
+                                                </svg>
+                                            </div>
+                                            <div style="margin-right: 70%;"> ⭐⭐⭐⭐</div>
+                                            <h5
+                                                style="font-weight: 700; color: #222; text-align: left; margin-bottom: 8px;">
+                                                Mr. Chinedu Okonkwo </h5>
+                                            <p
+                                                style="text-align: left; color: #555; font-size: 0.95rem; line-height: 1.5;">
+                                                Top performer 5 years running • Personalized luxury buying experience
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="card h-100 border-0 shadow-sm"
+                                        style="border-radius: 0px; overflow: hidden;">
+                                        <div class="card-body text-center p-4">
+                                            <div class="mx-auto mb-4"
+                                                style="width: 90px; height: 90px; background: #dee2e6; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center;">
+                                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none"
+                                                    stroke="#6c757d" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                                    <circle cx="12" cy="7" r="4"></circle>
+                                                </svg>
+                                            </div>
+                                            <div style="margin-right: 70%;"> ⭐⭐⭐⭐</div>
+                                            <h5
+                                                style="font-weight: 700; color: #222; text-align: left; margin-bottom: 8px;">
+                                                Mrs. Aisha Bello </h5>
+                                            <p
+                                                style="text-align: left; color: #555; font-size: 0.95rem; line-height: 1.5;">
+                                                100% client satisfaction rate • Your journey, our priority
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <button class="carousel-control-prev" type="button" data-bs-target="#teamCarousel"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#teamCarousel"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <style>
+
+    </style>
+
+    <section class="perfect-home-section">
+        <div class="container">
+            <div class="row align-items-center">
+
+                <div class="col-lg-5">
+                    <div class="section-title text-center">
+
+                        <h2
+                            style="text-align: left;font-weight: 500; color: #222; font-size: 2.2rem; text-align: left;">
+                            Lets find the perfect car for you</h2>
+
+                    </div>
+
+
+                    <div class="feature-card">
+                        <div class="d-flex align-items-start">
+                            <div class="feature-icon me-4">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <div>
+                                <h4 style="text-align: left;">Quality Properties</h4>
+                                <p style="text-align: left;"><strong>Exquisite Properties</strong> for You, Explore our
+                                    selection of quality engines. Luxury, comfort, and value combined. Your perfect
+                                    space awaits!</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="feature-card">
+                        <div class="d-flex align-items-start">
+                            <div class="feature-icon me-4">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <div>
+                                <h4 style="text-align: left;">Top Rated Agents</h4>
+                                <p style="text-align: left;"><strong>Trustworthy experts with a proven track
+                                        record.</strong> Experience, dedication, and personalized service. Your car
+                                    journey starts here!</p>
+                            </div>
+                        </div>
+                    </div>
+                    ->
+                    <div class="feature-card">
+                        <div class="d-flex align-items-start">
+                            <div class="feature-icon me-4">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div>
+                                <h4 style="text-align: left;">Easy and Safe</h4>
+                                <p style="text-align: left;"><strong>Easy and Safe Property Search.</strong> Simplify
+                                    your quest with us. Safe transactions, smooth process, and peace of mind guaranteed.
+                                    Let's...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-7">
+                    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.1.0&auto=format&fit=crop&w=600&q=80"
+                        alt="Luxury Home" class="img-fluid right-image w-100" style="margin-top: 10%;">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section style="padding:60px 20px; background:#e3dfdf; text-align:center;">
+        <h2
+            style="text-align: left;font-weight: 500; color: #111111; font-size: 2.2rem; text-align: left;text-align: center;">
+            Ready to Jump Start Your Dream Car?
+        </h2>
+        <a href="#contact" style="
+        display:inline-block;
+        padding:14px 40px;
+        font-size:1.1rem;
+        font-weight:600;
+        color:#f5f1f1;
+        border:2px solid #e3dcdc;
+        border-radius:50px;
+        text-decoration:none;
+        transition:all .3s ease;
+        background-color: #10cfed;
+        border-color: #131313;
+    " onmouseover="this.style.background='#d4af37'; this.style.color='#fff';"
+            onmouseout="this.style. this.style.color='#0e0f0f';">
+            Enquiry
+        </a>
+    </section>
+    <section style="padding:110px 20px 100px;background:#fff;">
+        <div class="container">
+
+            <h2
+                style="text-align:center;font-size:2.4rem;font-weight:0;color:#10cfed;margin:0 0 70px;letter-spacing:-0.5px;">
+                All at the Tip of Your Keys
+            </h2>
+
+            <div class="row justify-content-center g-5">
+
+                <div class="col-md-4">
+                    <div
+                        style="background:#fff;padding:40px;border-radius:20px;text-align:center;box-shadow:0 12px 35px rgba(0,0,0,0.08);">
+                        <div
+                            style="width:85px;height:85px;background:#10cfed;border-radius:50%;margin:0 auto 25px;display:flex;align-items:center;justify-content:center;">
+                            <i class="fas fa-crown" style="font-size:2.3rem;color:#fff;"></i>
+                        </div>
+                        <h4 style="font-size:1.5rem;font-weight:700;color:#222;margin:0 0 14px;">Elite Vehicles</h4>
+                        <p style="color:#555;line-height:1.8;margin-bottom:20px;">
+                            Vegas high-rises • Tahoe chalets • Private ranches
+                        </p>
+
+                        <div>
+                            <a href="#" style="margin:0 8px;font-size:1.4rem;color:#10cfed;"><i
+                                    class="fab fa-facebook-f"></i></a>
+                            <a href="#" style="margin:0 8px;font-size:1.4rem;color:#10cfed;"><i
+                                    class="fab fa-instagram"></i></a>
+                            <a href="#" style="margin:0 8px;font-size:1.4rem;color:#10cfed;"><i
+                                    class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div
+                        style="background:#fff;padding:40px;border-radius:20px;text-align:center;box-shadow:0 12px 35px rgba(0,0,0,0.08);">
+                        <div
+                            style="width:85px;height:85px;background:#10cfed;border-radius:50%;margin:0 auto 25px;display:flex;align-items:center;justify-content:center;">
+                            <i class="fas fa-handshake" style="font-size:2.3rem;color:#fff;"></i>
+                        </div>
+                        <h4 style="font-size:1.5rem;font-weight:700;color:#222;margin:0 0 14px;">VIP Agents</h4>
+                        <p style="color:#555;line-height:1.8;margin-bottom:20px;">
+                            24/7 support • Off-market deals • Same-day tours
+                        </p>
+                        <div>
+                            <a href="#" style="margin:0 8px;font-size:1.4rem;color:#10cfed;"><i
+                                    class="fab fa-facebook-f"></i></a>
+                            <a href="#" style="margin:0 8px;font-size:1.4rem;color:#10cfed;"><i
+                                    class="fab fa-instagram"></i></a>
+                            <a href="#" style="margin:0 8px;font-size:1.4rem;color:#10cfed;"><i
+                                    class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div
+                        style="background:#fff;padding:40px;border-radius:20px;text-align:center;box-shadow:0 12px 35px rgba(0,0,0,0.08);">
+                        <div
+                            style="width:85px;height:85px;background:#10cfed;border-radius:50%;margin:0 auto 25px;display:flex;align-items:center;justify-content:center;">
+                            <i class="fas fa-shield-alt" style="font-size:2.3rem;color:#fff;"></i>
+                        </div>
+                        <h4 style="font-size:1.5rem;font-weight:700;color:#222;margin:0 0 14px;">Zero Risk</h4>
+                        <p style="color:#555;line-height:1.8;margin-bottom:20px;">
+                            bringing you nothing but safety at it's peak because your safety is paramount
+                        </p>
+                        <div>
+                            <a href="#" style="margin:0 8px;font-size:1.4rem;color:#10cfed;"><i
+                                    class="fab fa-facebook-f"></i></a>
+                            <a href="#" style="margin:0 8px;font-size:1.4rem;color:#10cfed;"><i
+                                    class="fab fa-instagram"></i></a>
+                            <a href="#" style="margin:0 8px;font-size:1.4rem;color:#10cfed;"><i
+                                    class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </section>
+
+
+
+    <section style="padding:60px 20px;background:#faf8f8;text-align:center;">
+        <div class="container">
+            <a href="tel:+17025551234" style="
+      display:inline-block;
+      padding:14px 48px;
+      font-size:1.1rem;
+      font-weight:700;
+      color:#fff;
+      background:#151514;
+      border:none;
+      border-radius:50px;
+      text-decoration:none;
+      letter-spacing:1px;
+      box-shadow:0 8px 25px rgba(71, 90, 106, 0.4);
+      transition:all .3s;
+    " onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 12px 30px rgba(212,175,55,0.6)'"
+                onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 8px 25px rgba(212,175,55,0.4)'">
+                DOWNLOAD OUR BROCHURE NOW!
+            </a>
+        </div>
+    </section>
+    </a>
+    </div>
+    </div>
+    </section>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+    <footer style="background:#000;padding:90px 20px 40px;color:#999;font-family:'Helvetica Neue',sans-serif;">
+        <div class="container">
+            <div class="row text-center text-md-start">
+
+
+                <div class="col-lg-3 col-md-6 mb-5">
+                    <h4 style="color:#1bb5c6;font-size:1.8rem;font-weight:200;letter-spacing:-1px;margin:0 0 15px;">
+                        Aswaad Auto
+                    </h4>
+                    <p style="font-size:0.95rem;line-height:1.7;max-width:220px;margin-left: 18%;">
+                        Aswaad’s #1 broker for off-market V-engines, Big time car rims & private rental.
+                    </p>
+                </div>
+
+
+                <div class="col-lg-2 col-md-6 mb-5 offset-lg-1">
+                    <h6 style="color:#10cfed;font-weight:200;font-size:1rem;margin:0 0 20px;letter-spacing:0.5px;">
+                        EXPLORE</h6>
+                    <ul style="list-style:none;padding:0;margin:0;">
+                        <li style="margin:8px 0;"><a href="#"
+                                style="color:#999;text-decoration:none;font-size:0.92rem;transition:.3s;"
+                                onmouseover="this.style.color='#d4af37'" onmouseout="this.style.color='#999'">Las
+                                Vegas</a></li>
+                        <li style="margin:8px 0;"><a href="#"
+                                style="color:#999;text-decoration:none;font-size:0.92rem;transition:.3s;"
+                                onmouseover="this.style.color='#d4af37'" onmouseout="this.style.color='#999'">Lake
+                                Tahoe</a></li>
+                        <li style="margin:8px 0;"><a href="#"
+                                style="color:#999;text-decoration:none;font-size:0.92rem;transition:.3s;"
+                                onmouseover="this.style.color='#d4af37'" onmouseout="this.style.color='#999'">Reno</a>
+                        </li>
+                        <li style="margin:8px 0;"><a href="#"
+                                style="color:#999;text-decoration:none;font-size:0.92rem;transition:.3s;"
+                                onmouseover="this.style.color='#d4af37'"
+                                onmouseout="this.style.color='#999'">Off-Market</a></li>
+                    </ul>
+                </div>
+
+
+                <div class="col-lg-2 col-md-6 mb-5">
+                    <h6 style="color:#10cfed;font-weight:200;font-size:1rem;margin:0 0 20px;letter-spacing:0.5px;">
+                        SERVICES</h6>
+                    <ul style="list-style:none;padding:0;margin:0;">
+                        <li style="margin:8px 0;"><a href="#"
+                                style="color:#999;text-decoration:none;font-size:0.92rem;transition:.3s;"
+                                onmouseover="this.style.color='#d4af37'" onmouseout="this.style.color='#999'">Buy</a>
+                        </li>
+                        <li style="margin:8px 0;"><a href="#"
+                                style="color:#999;text-decoration:none;font-size:0.92rem;transition:.3s;"
+                                onmouseover="this.style.color='#d4af37'" onmouseout="this.style.color='#999'">Sell</a>
+                        </li>
+                        <li style="margin:8px 0;"><a href="#"
+                                style="color:#999;text-decoration:none;font-size:0.92rem;transition:.3s;"
+                                onmouseover="this.style.color='#d4af37'" onmouseout="this.style.color='#999'">Invest</a>
+                        </li>
+                        <li style="margin:8px 0;"><a href="#"
+                                style="color:#999;text-decoration:none;font-size:0.92rem;transition:.3s;"
+                                onmouseover="this.style.color='#d4af37'" onmouseout="this.style.color='#999'">Rent</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-5 offset-lg-1">
+                    <h6 style="color:#10cfed;font-weight:200;font-size:1rem;margin:0 0 20px;letter-spacing:0.5px;">24/7
+                        HOTLINE</h6>
+                    <p style="margin:0;font-size:1.3rem;color:#10cfed;font-weight:200;letter-spacing:0.5px;">
+                        <a href="tel:+2347036808234" style="color:#e9eff0;text-decoration:none;">+234 7036808234</a>
+                    </p>
+                    <p style="margin:12px 0 0;font-size:0.92rem;color:#777;">
+                        <a href="mailto:miqdadajijola@gmail.com"
+                            style="color:#777;text-decoration:none;">miqdadajijola@gmail.com</a>
+                            <a style="color: white;" href="https://wa.me/+2347070076194">+2347070076194</a>
+                    </p>
+                </div>
+
+            </div>
+
+            <hr style="border-color:#222;margin:50px 0 30px;">
+            
+
+            <div style="text-align:center;">
+                <div style="margin-bottom:20px;">
+                    <a href="#"
+                        style="margin:0 14px;font-size:1.6rem;color:#efede8;transition:.3s;text-decoration:none;"
+                        onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#d4af37'">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="#"
+                        style="margin:0 14px;font-size:1.6rem;color:#fdfbf7;transition:.3s;text-decoration:none;"
+                        onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#d4af37'">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#"
+                        style="margin:0 14px;font-size:1.6rem;color:#f4f2f0;transition:.3s;text-decoration:none;"
+                        onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#d4af37'">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+                <p style="margin:0;font-size:0.8rem;color:#555;">
+                    © 2025 aswaad autos.com. All Rights Reserved. Licensed in Aswaad #S.0183742
+                </p>
+            </div>
+        </div>
+        
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
